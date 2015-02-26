@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <tue_reasoner_core/Query.h>
+#include <swi_prolog/Query.h>
 
 #include <ros/node_handle.h>
 #include <ros/service_server.h>
@@ -11,15 +11,15 @@ Reasoner* reasoner;
 
 // ----------------------------------------------------------------------------------------------------
 
-bool querySrv(tue_reasoner_core::Query::Request& req, tue_reasoner_core::Query::Response& res)
+bool querySrv(swi_prolog::Query::Request& req, swi_prolog::Query::Response& res)
 {
     QueryResult qres;
     reasoner->query(req.query, qres);
 
     for(QueryResult::const_iterator it = qres.begin(); it != qres.end(); ++it)
     {
-        res.bindings.push_back(tue_reasoner_core::Bindings());
-        tue_reasoner_core::Bindings& bindings_msg = res.bindings.back();
+        res.bindings.push_back(swi_prolog::Bindings());
+        swi_prolog::Bindings& bindings_msg = res.bindings.back();
 
         const Bindings& bindings = *it;
         for(Bindings::const_iterator it_b = bindings.begin(); it_b != bindings.end(); ++it_b)

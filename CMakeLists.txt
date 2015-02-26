@@ -30,7 +30,7 @@ generate_messages(
 
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES reasoner
+  LIBRARIES swipl_ros
   CATKIN_DEPENDS roscpp roslib
 )
 
@@ -67,8 +67,9 @@ add_library(swipl_ros
 target_link_libraries(swipl_ros ${SWIPL_LIB} ${catkin_LIBRARIES})
 
 add_executable(swipl_server src/reasoner_server.cpp)
-target_link_libraries(swipl_server reasoner)
+target_link_libraries(swipl_server swipl_ros)
+add_dependencies(swipl_server ${PROJECT_NAME}_gencpp)
 
 add_executable(test_swipl test/test_reasoner.cpp)
-target_link_libraries(test_swipl reasoner)
+target_link_libraries(test_swipl swipl_ros)
 
