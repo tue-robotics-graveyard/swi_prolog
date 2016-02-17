@@ -18,11 +18,13 @@ Reasoner::Reasoner()
     // Initialize Prolog Engine
     putenv((char*)"SWI_HOME_DIR=/usr/lib/swi-prolog");
 
-    char** args = new char*[1];
-    args[0] = new char[1000];
+    char** args = new char*[2];
+    args[0] = new char[1];
+    args[1] = new char[2];
     strcpy(args[0], "/");
+    strcpy(args[1], "-q"); // run in silenced mode
 
-    prolog_engine_ = new PlEngine(1, args);
+    prolog_engine_ = new PlEngine(2, args);
 
     // Prolog has its own signal handler which seems to interfere with ROS' handler
     // Therefore, make sure ROS is shutdown if Prolog receives an interrupt signal
