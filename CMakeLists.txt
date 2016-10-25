@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(swi_prolog)
 
+# Not so nice solution to compile under kinetic. To be solved nicely
+set(CMAKE_CXX_FLAGS "-fpermissive -std=c++0x")
+
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   roslib
